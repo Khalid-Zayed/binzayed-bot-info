@@ -1,7 +1,7 @@
 # Bin Zayed Bot — Privacy Policy
 
 **Effective date:** July 27, 2026
-**Last updated:** July 27, 2026
+**Last updated:** July 29, 2026
 
 Bin Zayed Bot ("the Bot", "we", "us", "our") is a Discord moderation, economy, and gaming bot built for private server use.
 
@@ -23,12 +23,20 @@ By using Bin Zayed Bot in a server, you acknowledge that limited data described 
 
 ## 2. Data We Collect and Process
 
-The Bot only stores what specific features require. It does **not** archive general server messages, does **not** use any external database service, and does **not** use Discord's Message Content for anything other than reading prefix commands and game answers typed directly to it.
+The Bot only stores what specific features require. It does **not** archive general server messages, does **not** use any external database service, and does **not** use Discord's Message Content for anything other than reading prefix commands, game answers, auto-responder matching, and (if a server admin enables it) logging edited/deleted message content to a channel that admin chooses.
 
 ### Account and server data
 - Discord User IDs (to track balances, warns, permissions, game stats)
-- Guild role IDs (only for the `-صلاحيات` permission system, to check who can use which command)
+- Guild role IDs (for the permission system and level-up auto-roles)
+- Guild channel IDs (only for admin-configured features: welcome/leave/log/level-up channels)
 - Usernames (displayed in embeds; not stored longer than needed to show a message)
+
+### Server configuration data (admin-controlled, opt-in)
+- Welcome/leave message text and channel (if an admin sets these with `/setwelcome` / `/setleave`)
+- Level-up announcement channel and level-based auto-role mappings
+- Log channel ID (if an admin enables it with `/setlog`) — used to relay message edit/delete events and ban actions to that channel
+- Auto-responder trigger words and their responses (if an admin adds any)
+- Custom command prefix and prefix-command aliases, if changed from default
 
 ### Economy and games data
 - Currency balance, level, and XP per user
@@ -43,8 +51,10 @@ The Bot reads message content only when a feature needs it directly, specificall
 - Reading prefix commands (e.g. `-حظر`, `-رصيد`)
 - Reading answers typed during games (e.g. `-اسرع`, `-فكك`, `-ريبلكا`)
 - Reading a player's defense message during a Mafia trial (other messages sent during that 15-second window may be deleted by the Bot as part of the game's rules, if it has permission to do so)
+- Checking messages against admin-configured auto-responder trigger words (if any are set)
+- If a server admin has set a log channel (`/setlog`): relaying the text of a deleted or edited message, and who sent it, to that channel — this is a live relay of the message content to a channel the admin chose, not a separate stored record; the Bot does not keep a second copy of it anywhere else.
 
-The Bot does **not** log, archive, or forward general conversation to any external service. It does not read or process Direct Messages.
+The Bot does **not** log, archive, or forward general conversation to any external service beyond the admin's own chosen log channel (if enabled). It does not read or process Direct Messages.
 
 ### Generated images
 Some features generate an image or GIF on the fly (e.g. `-روليت`'s spinning wheel, Mafia's role-distribution card). These are created locally at the moment of the command and sent directly as a Discord attachment. They are not stored afterward and contain no personal data beyond what is already visible in the game (usernames/mentions already shown in the channel).
@@ -74,6 +84,10 @@ Unlike bots that use external databases (MongoDB, Redis, etc.), Bin Zayed Bot st
 - `points.json` — temporary session points
 - `mafia_stats.json` — mafia win/loss records
 - `shop.json` — shop item catalogue
+- `guild_settings.json` — welcome/leave messages, log channel, level-up channel, custom prefix (admin-configured, per server)
+- `level_roles.json` — level-based auto-role mappings (admin-configured, per server)
+- `autoresponders.json` — auto-responder trigger/response pairs (admin-configured, per server)
+- `prefix_aliases.json` — custom command alias mappings (admin-configured, per server)
 
 These files live only on the server the Bot is hosted on (Render or Railway) and are not synced to any third-party analytics, logging, or data-broker service.
 
@@ -112,3 +126,6 @@ This document may be updated as the Bot's features change. Check the file's "Las
 ## 9. Contact
 
 For questions about this policy, contact the server owner or bot operator directly.
+
+Bin Zayed Bot is developed and maintained by **Khalid Zayed**.
+Community/support server: https://discord.gg/T4mb6Y6fEZ
