@@ -1,7 +1,7 @@
 # Bin Zayed Bot — Privacy Policy
 
 **Effective date:** July 27, 2026
-**Last updated:** July 29, 2026
+**Last updated:** August 11, 2026
 
 Bin Zayed Bot ("the Bot", "we", "us", "our") is a Discord moderation, economy, and gaming bot built for private server use.
 
@@ -57,20 +57,23 @@ The Bot reads message content only when a feature needs it directly, specificall
 The Bot does **not** log, archive, or forward general conversation to any external service beyond the admin's own chosen log channel (if enabled). It does not read or process Direct Messages.
 
 ### Generated images
-Some features generate an image or GIF on the fly (e.g. `-روليت`'s spinning wheel, Mafia's role-distribution card). These are created locally at the moment of the command and sent directly as a Discord attachment. They are not stored afterward and contain no personal data beyond what is already visible in the game (usernames/mentions already shown in the channel).
+Some features generate an image or GIF on the fly (e.g. `-روليت`'s spinning wheel, Mafia's role-distribution card, `-rank`'s profile card). These are created at the moment of the command and sent directly as a Discord attachment. They are not stored afterward. The `-rank` card temporarily fetches the requested user's public Discord avatar image (already publicly visible on their profile) purely to render it into the card; the image itself is not saved anywhere.
+
+The `-خمن` game fetches a real photo from Wikimedia Commons (a free, public image library) each round; no personal data is involved in this, and the image is not retained after the round ends.
 
 ---
 
 ## 3. How We Use Data
 
 Data is processed only to:
-- Run moderation commands (ban, kick, mute, warn, clear)
-- Operate the economy system (balance, daily rewards, shop, leaderboard)
+- Run moderation commands (ban, kick, mute, warn, clear, channel lock/unlock)
+- Operate the economy system (balance, daily rewards, shop, leaderboard, rank cards, admin balance adjustments)
 - Run games and track scores/results
 - Enforce the server's custom command-permission settings
+- Let an authorized admin post a message through the bot (`/say`)
 - Fix bugs and keep the Bot running reliably
 
-We do not sell data. We do not use it for advertising. We do not share it with any third party except the hosting provider running the Bot's server (Render or Railway), which simply runs the Node.js process and stores its data files.
+We do not sell data. We do not use it for advertising. We do not share it with any third party except the hosting provider running the Bot's server (Render or Railway), which simply runs the Node.js process and stores its data files, and Wikimedia Commons, which supplies the free public images used in the `-خمن` game.
 
 ---
 
@@ -89,7 +92,7 @@ Unlike bots that use external databases (MongoDB, Redis, etc.), Bin Zayed Bot st
 - `autoresponders.json` — auto-responder trigger/response pairs (admin-configured, per server)
 - `prefix_aliases.json` — custom command alias mappings (admin-configured, per server)
 
-These files live only on the server the Bot is hosted on (Render or Railway) and are not synced to any third-party analytics, logging, or data-broker service.
+These files live only on the server the Bot is hosted on (Render or Railway), on a persistent storage volume controlled entirely by the server owner, and are not synced to any third-party analytics, logging, or data-broker service.
 
 ---
 
